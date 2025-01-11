@@ -27,11 +27,8 @@ public class SecurityConfiguration {
     @Autowired
     SecurityFilter securityFilter;
 
-    @Autowired
-    private OtherLoginSuccessHandler successHandler;
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, OtherLoginSuccessHandler successHandler) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 
         httpSecurity.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -49,11 +46,6 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/forms/public/**").permitAll()
                         .requestMatchers("/api/forms/**").authenticated()
                         .anyRequest().authenticated()
-                )
-                .oauth2Login(oauth -> oauth
-                        .loginPage("https://fulldev-seven.vercel.app/login")
-                        .successHandler(successHandler)
-                        .failureUrl("/login?error=true")
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
