@@ -56,7 +56,7 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://fulldev-seven.vercel.app"));
+        configuration.setAllowedOrigins(List.of("https://formfulldev.vercel.app"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Cookie", "Accept"));
         configuration.setExposedHeaders(List.of("Authorization"));

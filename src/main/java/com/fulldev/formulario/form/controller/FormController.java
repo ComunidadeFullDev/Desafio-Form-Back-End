@@ -21,6 +21,7 @@ import com.fulldev.formulario.security.domain.service.TokenService;
 import com.fulldev.formulario.security.domain.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +53,10 @@ public class FormController {
     private final TokenService tokenService;
     private final EmailService emailService;
 
-    private static final String BASE_URL = "https://fulldev-seven.vercel.app/form/preview?";
+    @Value("${front-end.url}")
+    private String frontEndUrl;
+
+    private String BASE_URL = frontEndUrl + "form/preview?";
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUserToAnswerForm(@RequestBody @Valid RegisterDTO registerDTO) {
@@ -312,9 +316,10 @@ public class FormController {
                     "<p>Olá %s,</p>" +
                             "<p>Seu formulário '%s' recebeu um total de %d respostas!</p>" +
                             "<p>Veja suas novas estatísticas atualizadas e importe um arquivo CSV com elas.</p>" +
-                            "<p><a href='https://fulldev-seven.vercel.app/form/builder?id=%d'>Clique aqui para acessar as estatísticas</a></p>",
-                    "usuário do construtor de forms da fulldev", form.getTitle(), countResponses, form.getId()
+                            "<p><a href='%sform/builder?id=%d'>Clique aqui para acessar as estatísticas</a></p>",
+                    "usuário do construtor de forms da fulldev", form.getTitle(), countResponses, frontEndUrl, form.getId()
             );
+
 
             emailService.sendSimpleEmail(email, subject, message);
         }

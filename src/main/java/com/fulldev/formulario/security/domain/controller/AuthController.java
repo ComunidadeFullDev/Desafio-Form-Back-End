@@ -12,6 +12,7 @@ import com.fulldev.formulario.form.service.EmailService;
 import com.fulldev.formulario.security.domain.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,6 +42,9 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${front-end.url}")
+    private String frontEndUrl;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthDTO authDTO) {
@@ -85,7 +89,7 @@ public class AuthController {
             String verificationToken = java.util.UUID.randomUUID().toString();
             user.setVerificationToken(verificationToken);
 
-            String verificationLink = "https://fulldev-seven.vercel.app/verify?token=" + verificationToken;
+            String verificationLink = frontEndUrl + "verify?token=" + verificationToken;
             emailService.sendVerificationEmail(user.getUsername(), "Confirmação de Cadastro", verificationLink);
 
             this.userRepository.save(user);
@@ -127,7 +131,7 @@ public class AuthController {
         String resetToken = UUID.randomUUID().toString();
         user.setResetToken(resetToken);
 
-        String resetLink = "https://fulldev-seven.vercel.app/reset-password?token=" + resetToken;
+        String resetLink = frontEndUrl + "reset-password?token=" + resetToken;
         emailService.sendPasswordResetEmail(user.getEmail(), "Redefinição de Senha", resetLink);
 
         userRepository.save(user);
