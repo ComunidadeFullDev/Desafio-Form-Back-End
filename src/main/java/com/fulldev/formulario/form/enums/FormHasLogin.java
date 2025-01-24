@@ -1,4 +1,4 @@
-package com.fulldev.formulario.form.model.entities;
+package com.fulldev.formulario.form.enums;
 
 public enum FormHasLogin {
     PRIVATE("private"),

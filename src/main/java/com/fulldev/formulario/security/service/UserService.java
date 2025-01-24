@@ -1,12 +1,10 @@
-package com.fulldev.formulario.security.domain.service;
+package com.fulldev.formulario.security.service;
 
-import com.fulldev.formulario.security.domain.model.entity.User;
-import com.fulldev.formulario.security.domain.repository.UserRepository;
+import com.fulldev.formulario.security.model.entity.User;
+import com.fulldev.formulario.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {

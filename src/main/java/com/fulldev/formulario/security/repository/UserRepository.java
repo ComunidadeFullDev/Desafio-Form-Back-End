@@ -1,11 +1,9 @@
-package com.fulldev.formulario.security.domain.repository;
+package com.fulldev.formulario.security.repository;
 
-import com.fulldev.formulario.security.domain.model.entity.User;
+import com.fulldev.formulario.security.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {

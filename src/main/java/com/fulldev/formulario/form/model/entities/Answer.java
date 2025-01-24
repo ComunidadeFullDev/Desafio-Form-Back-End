@@ -1,7 +1,7 @@
 package com.fulldev.formulario.form.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fulldev.formulario.security.domain.model.entity.User;
+import com.fulldev.formulario.security.model.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 

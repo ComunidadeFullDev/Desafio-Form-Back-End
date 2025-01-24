@@ -1,4 +1,4 @@
-package com.fulldev.formulario.security.domain.model.entity;
+package com.fulldev.formulario.security.model.entity;
 
 public enum UserRole {
     ADMIN("admin"),

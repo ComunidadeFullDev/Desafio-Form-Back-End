@@ -1,7 +1,7 @@
-package com.fulldev.formulario.security.infra.config;
+package com.fulldev.formulario.config;
 
-import com.fulldev.formulario.security.domain.repository.UserRepository;
-import com.fulldev.formulario.security.domain.service.TokenService;
+import com.fulldev.formulario.security.repository.UserRepository;
+import com.fulldev.formulario.security.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

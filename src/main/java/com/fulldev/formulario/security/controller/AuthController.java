@@ -1,15 +1,15 @@
-package com.fulldev.formulario.security.domain.controller;
+package com.fulldev.formulario.security.controller;
 
 
-import com.fulldev.formulario.security.domain.model.entity.UserRole;
-import com.fulldev.formulario.security.domain.service.TokenService;
-import com.fulldev.formulario.security.domain.dto.AuthDTO;
-import com.fulldev.formulario.security.domain.dto.LoginResponseDTO;
-import com.fulldev.formulario.security.domain.dto.RegisterDTO;
-import com.fulldev.formulario.security.domain.model.entity.User;
-import com.fulldev.formulario.security.domain.repository.UserRepository;
+import com.fulldev.formulario.security.model.entity.UserRole;
+import com.fulldev.formulario.security.service.TokenService;
+import com.fulldev.formulario.security.dto.AuthDTO;
+import com.fulldev.formulario.security.dto.LoginResponseDTO;
+import com.fulldev.formulario.security.dto.RegisterDTO;
+import com.fulldev.formulario.security.model.entity.User;
+import com.fulldev.formulario.security.repository.UserRepository;
 import com.fulldev.formulario.form.service.EmailService;
-import com.fulldev.formulario.security.domain.service.UserService;
+import com.fulldev.formulario.security.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

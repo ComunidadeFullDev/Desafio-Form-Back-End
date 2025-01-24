@@ -1,6 +1,6 @@
 package com.fulldev.formulario.form.model.entities;
 
-import com.fulldev.formulario.security.domain.model.entity.User;
+import com.fulldev.formulario.form.enums.FormHasLogin;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;

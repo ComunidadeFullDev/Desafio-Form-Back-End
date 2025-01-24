@@ -1,7 +1,7 @@
 package com.fulldev.formulario.form.service;
 
-import com.fulldev.formulario.security.domain.model.entity.User;
-import com.fulldev.formulario.security.domain.repository.UserRepository;
+import com.fulldev.formulario.security.model.entity.User;
+import com.fulldev.formulario.security.repository.UserRepository;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.MailException;
 import org.springframework.retry.annotation.Backoff;

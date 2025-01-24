@@ -1,4 +1,4 @@
-package com.fulldev.formulario.security.domain.model.entity;
+package com.fulldev.formulario.security.model.entity;
 
 import com.fulldev.formulario.form.model.entities.Form;
 import jakarta.persistence.*;

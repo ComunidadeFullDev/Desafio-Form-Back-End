@@ -1,23 +1,19 @@
 package com.fulldev.formulario;
 
 import com.fulldev.formulario.form.service.EmailService;
-import com.fulldev.formulario.security.domain.model.entity.User;
+import com.fulldev.formulario.security.model.entity.User;
 import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
-import com.fulldev.formulario.security.domain.repository.UserRepository;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.fulldev.formulario.security.repository.UserRepository;
 
 
 class EmailServiceTest {

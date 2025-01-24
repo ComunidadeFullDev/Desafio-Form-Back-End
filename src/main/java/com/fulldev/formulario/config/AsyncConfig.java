@@ -1,4 +1,4 @@
-package com.fulldev.formulario.security.infra.config;
+package com.fulldev.formulario.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
