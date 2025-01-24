@@ -1,7 +1,7 @@
 package com.fulldev.formulario;
 
+import com.fulldev.formulario.form.service.EmailService;
 import com.fulldev.formulario.security.domain.model.entity.User;
-import com.fulldev.formulario.security.domain.service.EmailService;
 import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
