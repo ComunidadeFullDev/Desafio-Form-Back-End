@@ -21,6 +21,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 
@@ -89,7 +93,7 @@ public class AuthController {
             String verificationToken = java.util.UUID.randomUUID().toString();
             user.setVerificationToken(verificationToken);
 
-            String verificationLink = frontEndUrl + "verify?token=" + verificationToken;
+            String verificationLink = frontEndUrl + "verify/" + verificationToken;
             emailService.sendVerificationEmail(user.getUsername(), "Confirmação de Cadastro", verificationLink);
 
             this.userRepository.save(user);
@@ -131,7 +135,7 @@ public class AuthController {
         String resetToken = UUID.randomUUID().toString();
         user.setResetToken(resetToken);
 
-        String resetLink = frontEndUrl + "reset-password?token=" + resetToken;
+        String resetLink = frontEndUrl + "reset-password/" + resetToken;
         emailService.sendPasswordResetEmail(user.getEmail(), "Redefinição de Senha", resetLink);
 
         userRepository.save(user);
@@ -164,6 +168,26 @@ public class AuthController {
 
         userRepository.save(user);
 
+        String email = user.getEmail();
+        String subject = "Confirmação de Alteração de Senha";
+
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        String date = now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+        String message = String.format(
+                "<p>Olá,</p>" +
+                        "<p>Informamos que a senha da sua conta no site da FullDev foi alterada com sucesso.</p>" +
+                        "<p>Data da alteração: %s</p>" +
+                        "<p>Hora da alteração: %s</p>" +
+                        "<p>Se você não realizou essa alteração, entre em contato conosco imediatamente.</p>" +
+                        "<p>Atenciosamente,</p>" +
+                        "<p>Equipe FullDev</p>",
+                date,
+                time
+        );
+
+        emailService.sendSimpleEmail(email, subject, message);
         return ResponseEntity.ok("Senha redefinida com sucesso.");
     }
 
