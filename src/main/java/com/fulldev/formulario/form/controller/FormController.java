@@ -19,6 +19,7 @@ import com.fulldev.formulario.security.domain.repository.UserRepository;
 import com.fulldev.formulario.form.service.EmailService;
 import com.fulldev.formulario.security.domain.service.TokenService;
 import com.fulldev.formulario.security.domain.service.UserService;
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,7 +57,12 @@ public class FormController {
     @Value("${front-end.url}")
     private String frontEndUrl;
 
-    private String BASE_URL = frontEndUrl + "form/preview?";
+    private String BASE_URL;
+
+    @PostConstruct
+    public void init() {
+        this.BASE_URL = frontEndUrl + "form/preview";
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUserToAnswerForm(@RequestBody @Valid RegisterDTO registerDTO) {
@@ -101,7 +107,7 @@ public class FormController {
                 for (Form form : forms) {
                     if (form.getIsPublished()) {
                         String idPublic = UUID.randomUUID().toString();
-                        String link = BASE_URL + "logintype=" + standard + "&form=" + idPublic;
+                        String link = BASE_URL + "/" + standard + "/" + idPublic;
                         form.setSendEmailResponsesCount(sendEmail);
                         form.setFormHasLogin(FormHasLogin.PRIVATE);
                         form.setLink(link);
@@ -114,7 +120,7 @@ public class FormController {
                 for (Form form : forms) {
                     if (form.getIsPublished()) {
                         String idPublic = UUID.randomUUID().toString();
-                        String link = BASE_URL + "logintype=" + standard + "&form=" + idPublic;
+                        String link = BASE_URL + "/" + standard + "/" + idPublic;
                         form.setSendEmailResponsesCount(sendEmail);
                         form.setFormHasLogin(FormHasLogin.PASSWORD);
                         form.setAccessPassword(password);
@@ -128,7 +134,7 @@ public class FormController {
                 for (Form form : forms) {
                     if (form.getIsPublished()) {
                         String idPublic = UUID.randomUUID().toString();
-                        String link = BASE_URL + "logintype=" + standard + "&form=" + idPublic;
+                        String link = BASE_URL + "/" + standard + "/" + idPublic;
                         form.setSendEmailResponsesCount(sendEmail);
                         form.setFormHasLogin(FormHasLogin.PUBLIC);
                         form.setLink(link);
@@ -224,7 +230,7 @@ public class FormController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Formulário não encontrado");
         }
         String idPublic = UUID.randomUUID().toString();
-        String link = BASE_URL + "logintype=" + form.getFormHasLogin().toString().toLowerCase() + "&form=" + idPublic;
+        String link = BASE_URL + "/" + form.getFormHasLogin().toString().toLowerCase() + "/" + idPublic;
 
         form.setIsPublished(true);
         form.setLink(link);
